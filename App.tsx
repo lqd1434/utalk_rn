@@ -8,21 +8,17 @@
  * @format
  */
 
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {
   Image,
   SafeAreaView,
-  ScrollView,
   StatusBar,
   StyleSheet,
   Text,
   View,
   NativeModules,
-  Dimensions,
-  useWindowDimensions,
   TextInput,
   TouchableWithoutFeedback,
-  TouchableNativeFeedback,
   TouchableOpacity,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
@@ -36,6 +32,14 @@ const App = () => {
 
   const inputRef1 = useRef<TextInput>(null);
   const inputRef2 = useRef<TextInput>(null);
+
+  useEffect(() => {
+    fetch('http://47.103.211.10:8080/msg/limit?count=20&lastId=0&from=1&to=2')
+      .then(res => res.json())
+      .then(resJson => {
+        console.log(resJson.list);
+      });
+  }, []);
 
   const handleClick = () => {
     inputRef1.current?.blur();
