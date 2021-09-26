@@ -5,6 +5,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 interface InputProps {
   prefixIcon: string;
   placeholder: string;
+  isSecure?: boolean;
   suffixIcon?: string;
   onClickSuffixIcon?: (e: GestureResponderEvent) => void;
   onChangeText: (text: string) => void;
@@ -17,11 +18,10 @@ export const Input = React.forwardRef((props: InputProps, ref: any) => {
     suffixIcon,
     onClickSuffixIcon,
     onChangeText,
+    isSecure = false,
   } = props;
 
   const [isFocused, setFocused] = useState(false);
-
-  console.log(ref?.current?.isFocused());
 
   return (
     <View style={isFocused ? {...styles.focus, ...styles.con} : styles.con}>
@@ -30,7 +30,8 @@ export const Input = React.forwardRef((props: InputProps, ref: any) => {
         onFocus={() => setFocused(true)}
         onBlur={() => setFocused(false)}
         style={styles.input}
-        placeholder={'请输入'}
+        placeholder={placeholder}
+        secureTextEntry={isSecure}
         selectionColor={'#7F7FDA'}
         onChangeText={onChangeText}
         defaultValue={''}
@@ -54,7 +55,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#EBE7FF',
     borderRadius: 50,
     marginTop: 20,
-    marginHorizontal: 20,
     paddingVertical: 5,
     paddingLeft: 6,
     paddingRight: 10,
