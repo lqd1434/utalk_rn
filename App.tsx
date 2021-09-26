@@ -22,6 +22,8 @@ import {
   useWindowDimensions,
   TextInput,
   TouchableWithoutFeedback,
+  TouchableNativeFeedback,
+  TouchableOpacity,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {Input} from './src/components/Input';
@@ -30,12 +32,12 @@ const {StatusBarManager} = NativeModules;
 
 const App = () => {
   const [email, setEmail] = useState('');
+  const [isShowPwd, setShowPwd] = useState(false);
 
   const inputRef1 = useRef<TextInput>(null);
   const inputRef2 = useRef<TextInput>(null);
 
   const handleClick = () => {
-    console.log('2689');
     inputRef1.current?.blur();
     inputRef2.current?.blur();
   };
@@ -63,17 +65,39 @@ const App = () => {
           <View style={styles.inputCard}>
             <Input
               ref={inputRef1}
-              placeholder={'请输入'}
+              placeholder={'请输入手机号或邮箱'}
               prefixIcon={'account-circle'}
               onChangeText={text => setEmail(text)}
             />
             <Input
               ref={inputRef2}
-              placeholder={'请输入'}
-              prefixIcon={'account-circle'}
+              isSecure={isShowPwd}
+              placeholder={'请输入密码'}
+              prefixIcon={'lock'}
               onChangeText={text => setEmail(text)}
-              suffixIcon={'visibility'}
+              onClickSuffixIcon={() => setShowPwd(!isShowPwd)}
+              suffixIcon={isShowPwd ? 'visibility-off' : 'visibility'}
             />
+            <TouchableOpacity
+              onPress={() => {
+                console.log('55');
+              }}>
+              <Text style={styles.forget}>忘记密码?</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                console.log('55');
+              }}>
+              <View style={{borderRadius: 100}}>
+                <Text style={styles.btn}>登录</Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                console.log('55');
+              }}>
+              <Text style={styles.register}>没有账号?去注册</Text>
+            </TouchableOpacity>
           </View>
         </LinearGradient>
       </TouchableWithoutFeedback>
@@ -90,11 +114,11 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
   },
   header: {
-    marginTop: 80,
+    marginTop: 60,
   },
   logo: {
-    width: 100,
-    height: 100,
+    width: 120,
+    height: 120,
     alignSelf: 'center',
     resizeMode: 'contain',
   },
@@ -112,6 +136,30 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     minHeight: 360,
     marginVertical: 80,
+    paddingHorizontal: 20,
+    paddingTop: 10,
+  },
+  forget: {
+    color: '#7F7FDA',
+    fontSize: 18,
+    alignSelf: 'center',
+    marginVertical: 20,
+  },
+  btn: {
+    backgroundColor: '#7F7FDA',
+    paddingVertical: 13,
+    textAlign: 'center',
+    alignSelf: 'center',
+    width: '100%',
+    fontSize: 25,
+    color: 'white',
+    borderRadius: 100,
+  },
+  register: {
+    color: '#7F7FDA',
+    fontSize: 18,
+    alignSelf: 'center',
+    marginTop: 20,
   },
 });
 
