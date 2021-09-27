@@ -8,17 +8,24 @@
  * @format
  */
 
-import React from 'react';
+import React, {useEffect} from 'react';
 import {StatusBar} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Login from './src/pages/Login';
 import Index from './src/pages/Index';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
+import {emitter} from './src/utils/EventEmiter';
 
 const {Screen, Navigator} = createNativeStackNavigator();
 
 const App = () => {
+  useEffect(() => {
+    emitter.on<string>('test', data => {
+      console.log(data);
+    });
+  }, []);
+
   return (
     <SafeAreaProvider>
       <NavigationContainer>
@@ -26,6 +33,7 @@ const App = () => {
           barStyle={'light-content'}
           translucent={true}
           backgroundColor={'transparent'}
+          hidden={true}
         />
         <Navigator
           initialRouteName={'Index'}
