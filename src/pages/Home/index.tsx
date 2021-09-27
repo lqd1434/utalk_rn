@@ -1,7 +1,8 @@
 import TabBar from '../../components/TabBar';
-import Login from '../Login';
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import Friends from '../Friends';
+import Index from '../Index';
 const {Screen, Navigator} = createBottomTabNavigator();
 
 const Home = () => {
@@ -9,8 +10,17 @@ const Home = () => {
     <>
       <Navigator
         tabBar={props => <TabBar {...props} />}
-        initialRouteName={'Login'}>
-        <Screen name={'Login'} getComponent={() => Login} />
+        initialRouteName={'Index'}>
+        <Screen
+          name={'Index'}
+          getComponent={() => Index}
+          options={{headerShown: false}}
+        />
+        <Screen
+          name={'Friends'}
+          getComponent={() => Friends}
+          options={{headerShown: false}}
+        />
       </Navigator>
     </>
   );

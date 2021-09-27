@@ -13,7 +13,6 @@ import {Input} from '../../components/Input';
 import React, {useRef, useState} from 'react';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {useNavigation} from '@react-navigation/native';
-import {SafeAreaView} from 'react-native-safe-area-context';
 const {StatusBarManager} = NativeModules;
 
 const Login = () => {

@@ -1,21 +1,18 @@
-import {Text, View} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {Text, TouchableOpacity} from 'react-native';
 import React from 'react';
-import {emitter} from '../../utils/EventEmiter';
+import {BottomTabBarProps} from '@react-navigation/bottom-tabs';
+import {View} from 'native-base';
 
-const Index = () => {
-  const navigation = useNavigation<NativeStackNavigationProp<any>>();
+interface Props extends BottomTabBarProps {}
 
+const Index: React.FC<Props> = () => {
   return (
-    <View>
-      <Text
-        onPress={() => {
-          emitter.emit<string>('test', 'hello');
-          navigation.push('Login');
-        }}>
-        Index
-      </Text>
+    <View mt={25} flex={1} backgroundColor={'#7F00FF'}>
+      <TouchableOpacity>
+        <View>
+          <Text>Index</Text>
+        </View>
+      </TouchableOpacity>
     </View>
   );
 };
