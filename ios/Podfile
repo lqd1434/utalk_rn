@@ -12,7 +12,7 @@ target 'rn_study' do
     :hermes_enabled => false
   )
 
-  pod 'react-native-splash-screen', :path => '../node_modules/react-native-splash-screen'
+#   pod 'react-native-splash-screen', :path => '../node_modules/react-native-splash-screen'
 
   target 'rn_studyTests' do
     inherit! :complete

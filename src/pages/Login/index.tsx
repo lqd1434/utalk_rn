@@ -26,7 +26,6 @@ const Login = () => {
     inputRef1.current?.blur();
     inputRef2.current?.blur();
   };
-  console.log(11);
 
   return (
     // <SafeAreaView>
@@ -70,7 +69,7 @@ const Login = () => {
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => {
-              navigation.navigate('Index');
+              navigation.navigate('Home');
             }}>
             <View style={{borderRadius: 100}}>
               <Text style={styles.btn}>登录</Text>

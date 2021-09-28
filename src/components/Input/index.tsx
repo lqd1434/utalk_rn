@@ -1,6 +1,12 @@
-import {GestureResponderEvent, StyleSheet, TextInput, View} from 'react-native';
+import {
+  GestureResponderEvent,
+  StyleSheet,
+  TextInput,
+  useWindowDimensions,
+} from 'react-native';
 import React, {useState} from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import {Shadow} from 'react-native-neomorph-shadows';
 
 interface InputProps {
   prefixIcon: string;
@@ -22,9 +28,22 @@ export const Input = React.forwardRef((props: InputProps, ref: any) => {
   } = props;
 
   const [isFocused, setFocused] = useState(false);
+  const {width} = useWindowDimensions();
 
   return (
-    <View style={isFocused ? {...styles.focus, ...styles.con} : styles.con}>
+    <Shadow
+      useArt
+      style={{
+        shadowOffset: {width: 0, height: 0},
+        shadowOpacity: 1,
+        shadowColor: isFocused ? '#8289E8' : 'white',
+        shadowRadius: 10,
+        elevation: 10,
+        width: width - 80,
+        height: 55,
+        ...styles.con,
+        // ...include most of View/Layout styles
+      }}>
       <Icon name={prefixIcon} size={30} color="#8787D2" style={styles.icon} />
       <TextInput
         onFocus={() => setFocused(true)}
@@ -46,7 +65,8 @@ export const Input = React.forwardRef((props: InputProps, ref: any) => {
           style={styles.icon}
         />
       )}
-    </View>
+      {/*</View>*/}
+    </Shadow>
   );
 });
 

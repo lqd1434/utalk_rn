@@ -30,7 +30,7 @@ const App = () => {
             backgroundColor={'transparent'}
           />
           <Navigator
-            initialRouteName={'Home'}
+            initialRouteName={'Login'}
             screenOptions={{
               headerStyle: {
                 backgroundColor: '#f4511e',

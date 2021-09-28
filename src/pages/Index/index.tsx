@@ -2,19 +2,28 @@ import {Text, TouchableOpacity, useWindowDimensions} from 'react-native';
 import React from 'react';
 import {BottomTabBarProps} from '@react-navigation/bottom-tabs';
 import {View} from 'native-base';
+import {Shadow} from 'react-native-neomorph-shadows';
 
 interface Props extends BottomTabBarProps {}
 
 const Index: React.FC<Props> = () => {
   console.log(useWindowDimensions());
   return (
-    <View mt={25} flex={1} backgroundColor={'#7F00FF'}>
-      <TouchableOpacity>
-        <View>
-          <Text>Index</Text>
-        </View>
-      </TouchableOpacity>
-    </View>
+    <Shadow
+      useArt // <- set this prop to use non-native shadow on ios
+      style={{
+        shadowOffset: {width: 0, height: 0},
+        shadowOpacity: 1,
+        shadowColor: '#CCCCCC',
+        shadowRadius: 20,
+        borderRadius: 20,
+        margin: 50,
+        backgroundColor: 'white',
+        width: 100,
+        height: 100,
+        // ...include most of View/Layout styles
+      }}
+    />
   );
 };
 

@@ -1,12 +1,7 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {VStack, Text} from 'native-base';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import {
-  GestureResponderEvent,
-  StyleSheet,
-  TouchableOpacity,
-  TouchableWithoutFeedback,
-} from 'react-native';
+import {GestureResponderEvent, TouchableWithoutFeedback} from 'react-native';
 import {NavigationHelpers, ParamListBase} from '@react-navigation/native';
 import {BottomTabNavigationEventMap} from '@react-navigation/bottom-tabs/lib/typescript/src/types';
 import {useTabStore} from '../../zustandStore';
@@ -39,18 +34,14 @@ const TabBarItem: React.FC<TabBarItemProps> = ({
       size.value = withTiming(1, {duration: 200});
     }, 150);
     e.stopPropagation();
-    console.log(route);
     if (route !== currentTab) {
       setCurrentTab(route);
       navigation.navigate(route);
     }
-    console.log('onPressOut', size);
   };
 
   const onPressIn = () => {
-    // setFocused(true);
-    size.value = withTiming(0.9, {duration: 200});
-    console.log('onPressIn', size);
+    size.value = withTiming(0.85, {duration: 200});
   };
 
   const animatedStyles = useAnimatedStyle(() => {
@@ -62,12 +53,7 @@ const TabBarItem: React.FC<TabBarItemProps> = ({
   return (
     <TouchableWithoutFeedback onPressOut={onPressOut} onPressIn={onPressIn}>
       <Animated.View style={[animatedStyles]}>
-        <VStack
-          space={0}
-          backgroundColor={'#E3ECEE'}
-          px={3}
-          // style={isFocused ? styles.tabFocused : styles.tabNormal}
-          alignItems="center">
+        <VStack space={0} px={3} alignItems="center">
           <Icon name={icon} size={30} color={'#8787D2'} />
           <Text onPressOut={onPressOut} onPressIn={onPressIn} color={'#8787D2'}>
             {title}
@@ -79,12 +65,3 @@ const TabBarItem: React.FC<TabBarItemProps> = ({
 };
 
 export default TabBarItem;
-
-const styles = StyleSheet.create({
-  tabNormal: {
-    transform: [{scale: 1}],
-  },
-  tabFocused: {
-    transform: [{scale: 0.8}],
-  },
-});
