@@ -13,7 +13,7 @@ import {useTabStore} from '../../zustandStore';
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
-  withSpring,
+  withTiming,
 } from 'react-native-reanimated';
 
 interface TabBarItemProps {
@@ -32,17 +32,12 @@ const TabBarItem: React.FC<TabBarItemProps> = ({
   route,
 }) => {
   const {currentTab, setCurrentTab} = useTabStore(state => state);
-  const [isFocused, setFocused] = useState(false);
   const size = useSharedValue(1);
 
-  const doJump = (route: string) => {
-    // setCurrentTab(route);
-    // navigation.navigate(route);
-    console.log(size);
-  };
-  // console.log(size);
   const onPressOut = (e: GestureResponderEvent) => {
-    size.value = withSpring(1);
+    setTimeout(() => {
+      size.value = withTiming(1, {duration: 200});
+    }, 150);
     e.stopPropagation();
     console.log(route);
     if (route !== currentTab) {
@@ -51,9 +46,10 @@ const TabBarItem: React.FC<TabBarItemProps> = ({
     }
     console.log('onPressOut', size);
   };
+
   const onPressIn = () => {
     // setFocused(true);
-    size.value = withSpring(0.7);
+    size.value = withTiming(0.9, {duration: 200});
     console.log('onPressIn', size);
   };
 
@@ -64,10 +60,7 @@ const TabBarItem: React.FC<TabBarItemProps> = ({
   });
 
   return (
-    <TouchableWithoutFeedback
-      onPress={() => doJump(route)}
-      onPressOut={onPressOut}
-      onPressIn={onPressIn}>
+    <TouchableWithoutFeedback onPressOut={onPressOut} onPressIn={onPressIn}>
       <Animated.View style={[animatedStyles]}>
         <VStack
           space={0}
@@ -76,11 +69,7 @@ const TabBarItem: React.FC<TabBarItemProps> = ({
           // style={isFocused ? styles.tabFocused : styles.tabNormal}
           alignItems="center">
           <Icon name={icon} size={30} color={'#8787D2'} />
-          <Text
-            onPress={() => doJump(route)}
-            onPressOut={onPressOut}
-            onPressIn={onPressIn}
-            color={'#8787D2'}>
+          <Text onPressOut={onPressOut} onPressIn={onPressIn} color={'#8787D2'}>
             {title}
           </Text>
         </VStack>
