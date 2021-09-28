@@ -19,7 +19,7 @@ const Login = () => {
   const navigation = useNavigation<NativeStackNavigationProp<any>>();
   const [email, setEmail] = useState('');
   const [isShowPwd, setShowPwd] = useState(false);
-
+  console.log(email);
   const inputRef1 = useRef<TextInput>(null);
   const inputRef2 = useRef<TextInput>(null);
   const handleClick = () => {
