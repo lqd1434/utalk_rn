@@ -55,10 +55,10 @@ const Login = () => {
       return;
     }
     setStatus(Status.loading);
-    aniValue.value = withTiming(60, {duration: 400});
+    aniValue.value = withTiming(60, {duration: 500});
     setTimeout(() => {
       setStatus(Status.success);
-      aniValue.value = withTiming(width - 80, {duration: 400});
+      aniValue.value = withTiming(width - 80, {duration: 500});
     }, 5000);
   };
 
@@ -204,7 +204,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#7F7FDA',
   },
   success: {
-    backgroundColor: '#89E882',
+    backgroundColor: '#5660E0',
   },
   register: {
     color: '#7F7FDA',
