@@ -20,12 +20,18 @@ import {NativeBaseProvider} from 'native-base';
 const {Screen, Navigator} = createNativeStackNavigator();
 
 const App = () => {
+  const config = {
+    dependencies: {
+      'linear-gradient': require('react-native-linear-gradient').default,
+    },
+  };
+
   return (
     <SafeAreaProvider>
-      <NativeBaseProvider>
+      <NativeBaseProvider config={config}>
         <NavigationContainer>
           <StatusBar
-            barStyle={'light-content'}
+            barStyle={'dark-content'}
             translucent={true}
             backgroundColor={'transparent'}
           />

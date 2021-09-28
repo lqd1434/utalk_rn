@@ -15,9 +15,7 @@ interface TabBarItemProps {
   icon: string;
   title: string;
   route: string;
-  navigation:
-    | NavigationHelpers<ParamListBase, BottomTabNavigationEventMap>
-    | any;
+  navigation: NavigationHelpers<ParamListBase, BottomTabNavigationEventMap>;
 }
 
 const TabBarItem: React.FC<TabBarItemProps> = ({
@@ -43,7 +41,6 @@ const TabBarItem: React.FC<TabBarItemProps> = ({
   const onPressIn = () => {
     size.value = withTiming(0.85, {duration: 200});
   };
-
   const animatedStyles = useAnimatedStyle(() => {
     return {
       transform: [{scale: size.value}],

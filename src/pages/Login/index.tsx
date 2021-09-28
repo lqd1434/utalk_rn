@@ -7,24 +7,84 @@ import {
   TextInput,
   TouchableOpacity,
   TouchableWithoutFeedback,
+  useWindowDimensions,
   View,
 } from 'react-native';
 import {Input} from '../../components/Input';
 import React, {useRef, useState} from 'react';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {useNavigation} from '@react-navigation/native';
+import {Spinner} from 'native-base';
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from 'react-native-reanimated';
 const {StatusBarManager} = NativeModules;
+
+enum Status {
+  idle,
+  loading,
+  success,
+  error,
+}
 
 const Login = () => {
   const navigation = useNavigation<NativeStackNavigationProp<any>>();
+  const {width} = useWindowDimensions();
+
+  const aniValue = useSharedValue(width - 80);
+  const animatedStyles = useAnimatedStyle(() => {
+    return {
+      width: aniValue.value,
+    };
+  });
+
   const [email, setEmail] = useState('');
   const [isShowPwd, setShowPwd] = useState(false);
-  console.log(email);
+  const [status, setStatus] = useState(Status.idle);
   const inputRef1 = useRef<TextInput>(null);
   const inputRef2 = useRef<TextInput>(null);
   const handleClick = () => {
     inputRef1.current?.blur();
     inputRef2.current?.blur();
+  };
+
+  const login = () => {
+    if (Status.idle !== status) {
+      return;
+    }
+    setStatus(Status.loading);
+    aniValue.value = withTiming(60, {duration: 400});
+    setTimeout(() => {
+      setStatus(Status.success);
+      aniValue.value = withTiming(width - 80, {duration: 400});
+    }, 5000);
+  };
+
+  const renderBtn = () => {
+    switch (status) {
+      case Status.idle:
+        return (
+          <Animated.View style={[styles.idle, styles.btn, animatedStyles]}>
+            <Text style={styles.text}>登录</Text>
+          </Animated.View>
+        );
+      case Status.loading:
+        return (
+          <Animated.View style={[styles.loading, styles.btn, animatedStyles]}>
+            <Spinner size={30} color={'white'} />
+          </Animated.View>
+        );
+      case Status.success:
+        return (
+          <Animated.View style={[styles.success, styles.btn, animatedStyles]}>
+            <Text style={styles.text}>登录成功</Text>
+          </Animated.View>
+        );
+      case Status.error:
+        return 100;
+    }
   };
 
   return (
@@ -67,14 +127,9 @@ const Login = () => {
             }}>
             <Text style={styles.forget}>忘记密码?</Text>
           </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => {
-              navigation.navigate('Home');
-            }}>
-            <View style={{borderRadius: 100}}>
-              <Text style={styles.btn}>登录</Text>
-            </View>
-          </TouchableOpacity>
+          <TouchableWithoutFeedback onPress={login}>
+            {renderBtn()}
+          </TouchableWithoutFeedback>
           <TouchableOpacity
             onPress={() => {
               console.log('55');
@@ -131,14 +186,25 @@ const styles = StyleSheet.create({
     marginVertical: 20,
   },
   btn: {
-    backgroundColor: '#7F7FDA',
     paddingVertical: 13,
     textAlign: 'center',
     alignSelf: 'center',
-    width: '100%',
-    fontSize: 25,
-    color: 'white',
     borderRadius: 100,
+    height: 60,
+  },
+  text: {fontSize: 25, color: 'white', textAlign: 'center'},
+  loading: {
+    height: 60,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#ADD3F0',
+  },
+  idle: {
+    backgroundColor: '#7F7FDA',
+  },
+  success: {
+    backgroundColor: '#89E882',
   },
   register: {
     color: '#7F7FDA',

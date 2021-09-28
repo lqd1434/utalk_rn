@@ -1,7 +1,6 @@
-import {Text, TouchableOpacity, useWindowDimensions} from 'react-native';
+import {useWindowDimensions} from 'react-native';
 import React from 'react';
 import {BottomTabBarProps} from '@react-navigation/bottom-tabs';
-import {View} from 'native-base';
 import {Shadow} from 'react-native-neomorph-shadows';
 
 interface Props extends BottomTabBarProps {}
