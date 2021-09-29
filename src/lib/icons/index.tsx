@@ -6,17 +6,9 @@ interface IconProps {
   color?: string;
 }
 
-export const ThumbIcon: React.FC<IconProps> = ({
-  size = 25,
-  color = '#FF3333',
-}) => {
+export const ThumbIcon: React.FC<IconProps> = ({color = '#FFF'}) => {
   return (
-    <Icon
-      d="1631687782533"
-      viewBox="0 0 1024 1024"
-      p-id="50270"
-      width={size}
-      height={size}>
+    <Icon d="1631687782533" viewBox="0 0 1024 1024" p-id="50270" size={'xs'}>
       <Path
         d="M512 128v450.133333A170.666667 170.666667 0 1 0 597.333333 725.333333V298.666667h170.666667V128z"
         p-id="50271"

@@ -1,8 +1,8 @@
 import React from 'react';
-import {Circle, Text, View, Heading} from 'native-base';
+import {Circle, Text, View, Heading, Slider, Icon} from 'native-base';
 import {StyleSheet, useWindowDimensions} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import {AlbumIcon, BackIcon} from '../../lib/icons';
+import {AlbumIcon, BackIcon, ThumbIcon} from '../../lib/icons';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import PlayIcon from './components/PlayIcon';
 import LastIcon from './components/LastIcon';
@@ -60,6 +60,22 @@ const PlayPage = () => {
         </Text>
       </View>
       <View style={styles.optionIcons} />
+      <View style={styles.progress}>
+        <Text>00:00</Text>
+        <View style={{width: '65%'}}>
+          <Slider defaultValue={70} size="sm" colorScheme="green">
+            <Slider.Track bg={'#CFCFFD'}>
+              <Slider.FilledTrack bg={'#6D6DF9'} />
+            </Slider.Track>
+            <Slider.Thumb borderWidth="0" bg="transparent">
+              <Circle size={5} backgroundColor={'#9E9EFB'}>
+                <Icon as={ThumbIcon} name="park" />
+              </Circle>
+            </Slider.Thumb>
+          </Slider>
+        </View>
+        <Text>03:10</Text>
+      </View>
       <View style={styles.playIcons}>
         <LastIcon />
         <PlayIcon />
@@ -92,6 +108,15 @@ const styles = StyleSheet.create({
   },
   optionIcons: {
     height: 60,
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-around',
+  },
+  progress: {
+    height: 30,
+    paddingHorizontal: 10,
+    width: '100%',
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
