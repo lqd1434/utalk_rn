@@ -1,32 +1,30 @@
-import React, {useState} from 'react';
+import React from 'react';
 import LinearGradient from 'react-native-linear-gradient';
 import {Shadow} from 'react-native-neomorph-shadows';
-import {PlayIcon as Play, PauseIcon as Pause} from '../../../lib/icons';
-import {TouchableWithoutFeedback} from 'react-native';
+import {NextIcon as Next} from '../../../lib/icons';
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
+import {TouchableWithoutFeedback} from 'react-native';
 
-const PlayIcon = () => {
-  const [playing, setPlay] = useState(false);
-
-  const aniValue = useSharedValue(1);
+const NextIcon = () => {
+  const aniValue = useSharedValue(0);
   const animatedStyles = useAnimatedStyle(() => {
     return {
-      transform: [{scale: aniValue.value}],
-      opacity: aniValue.value,
+      transform: [{translateX: aniValue.value}],
     };
   });
   const onPress = () => {
-    aniValue.value = withTiming(0, {duration: 300});
+    aniValue.value = withTiming(5, {duration: 300});
     setTimeout(() => {
-      setPlay(!playing);
-      aniValue.value = withTiming(1, {duration: 300});
+      aniValue.value = withTiming(-5, {duration: 500});
+      setTimeout(() => {
+        aniValue.value = withTiming(0, {duration: 300});
+      }, 300);
     }, 300);
   };
-
   return (
     <TouchableWithoutFeedback onPress={onPress}>
       <Shadow
@@ -42,8 +40,8 @@ const PlayIcon = () => {
           borderColor: '#FFF',
           borderWidth: 1,
           borderStyle: 'solid',
-          width: 85,
-          height: 85,
+          width: 70,
+          height: 70,
           borderRadius: 100,
           display: 'flex',
           justifyContent: 'center',
@@ -56,8 +54,8 @@ const PlayIcon = () => {
           locations={[0.7, 1]}
           style={{
             backgroundColor: '#FFFFFF',
-            width: 70,
-            height: 70,
+            width: 60,
+            height: 60,
             borderRadius: 100,
             display: 'flex',
             justifyContent: 'center',
@@ -65,6 +63,8 @@ const PlayIcon = () => {
             elevation: 10,
             shadowColor: '#8289E8',
             shadowOffset: {width: -10, height: -10},
+            shadowRadius: 10,
+            shadowOpacity: 1,
           }}>
           <LinearGradient
             colors={['#6765CB', '#ADB1F0']}
@@ -73,16 +73,15 @@ const PlayIcon = () => {
             locations={[0.2, 1]}
             style={{
               backgroundColor: '#FFFFFF',
-              width: 58,
-              height: 58,
+              width: 48,
+              height: 48,
               borderRadius: 100,
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'center',
-              paddingLeft: playing ? 0 : 5,
             }}>
             <Animated.View style={animatedStyles}>
-              {playing ? <Pause /> : <Play />}
+              <Next />
             </Animated.View>
           </LinearGradient>
         </LinearGradient>
@@ -91,4 +90,4 @@ const PlayIcon = () => {
   );
 };
 
-export default PlayIcon;
+export default NextIcon;

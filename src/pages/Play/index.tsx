@@ -5,6 +5,8 @@ import LinearGradient from 'react-native-linear-gradient';
 import {AlbumIcon, BackIcon} from '../../lib/icons';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import PlayIcon from './components/PlayIcon';
+import LastIcon from './components/LastIcon';
+import NextIcon from './components/NextIcon';
 
 const PlayPage = () => {
   const {width} = useWindowDimensions();
@@ -59,7 +61,9 @@ const PlayPage = () => {
       </View>
       <View style={styles.optionIcons} />
       <View style={styles.playIcons}>
+        <LastIcon />
         <PlayIcon />
+        <NextIcon />
       </View>
     </LinearGradient>
   );
@@ -95,6 +99,7 @@ const styles = StyleSheet.create({
   },
   playIcons: {
     flex: 1,
+    width: '95%',
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
