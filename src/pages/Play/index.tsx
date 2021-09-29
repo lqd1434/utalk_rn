@@ -61,7 +61,7 @@ const PlayPage = () => {
       </View>
       <View style={styles.optionIcons} />
       <View style={styles.progress}>
-        <Text>00:00</Text>
+        <Text color={'#FFF'}>00:00</Text>
         <View style={{width: '65%'}}>
           <Slider defaultValue={70} size="sm" colorScheme="green">
             <Slider.Track bg={'#CFCFFD'}>
@@ -74,7 +74,7 @@ const PlayPage = () => {
             </Slider.Thumb>
           </Slider>
         </View>
-        <Text>03:10</Text>
+        <Text color={'#FFF'}>03:10</Text>
       </View>
       <View style={styles.playIcons}>
         <LastIcon />
