@@ -40,7 +40,6 @@ const Login = () => {
     };
   });
 
-  const [email, setEmail] = useState('');
   const [isShowPwd, setShowPwd] = useState(false);
   const [status, setStatus] = useState(Status.idle);
   const inputRef1 = useRef<TextInput>(null);
@@ -59,7 +58,10 @@ const Login = () => {
     setTimeout(() => {
       setStatus(Status.success);
       aniValue.value = withTiming(width - 80, {duration: 500});
-    }, 5000);
+      setTimeout(() => {
+        navigation.navigate('Home');
+      }, 2000);
+    }, 3000);
   };
 
   const renderBtn = () => {
@@ -110,14 +112,18 @@ const Login = () => {
             ref={inputRef1}
             placeholder={'请输入手机号或邮箱'}
             prefixIcon={'account-circle'}
-            onChangeText={text => setEmail(text)}
+            onChangeText={text => {
+              console.log(text);
+            }}
           />
           <Input
             ref={inputRef2}
             isSecure={isShowPwd}
             placeholder={'请输入密码'}
             prefixIcon={'lock'}
-            onChangeText={text => setEmail(text)}
+            onChangeText={text => {
+              console.log(text);
+            }}
             onClickSuffixIcon={() => setShowPwd(!isShowPwd)}
             suffixIcon={isShowPwd ? 'visibility-off' : 'visibility'}
           />

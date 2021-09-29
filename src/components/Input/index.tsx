@@ -42,7 +42,6 @@ export const Input = React.forwardRef((props: InputProps, ref: any) => {
         width: width - 80,
         height: 55,
         ...styles.con,
-        // ...include most of View/Layout styles
       }}>
       <Icon name={prefixIcon} size={30} color="#8787D2" style={styles.icon} />
       <TextInput

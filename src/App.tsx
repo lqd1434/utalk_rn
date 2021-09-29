@@ -16,6 +16,7 @@ import Login from './pages/Login';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import Home from './pages/Home';
 import {NativeBaseProvider} from 'native-base';
+import PlayPage from './pages/Play';
 
 const {Screen, Navigator} = createNativeStackNavigator();
 
@@ -36,7 +37,7 @@ const App = () => {
             backgroundColor={'transparent'}
           />
           <Navigator
-            initialRouteName={'Login'}
+            initialRouteName={'PlayPage'}
             screenOptions={{
               headerStyle: {
                 backgroundColor: '#f4511e',
@@ -56,6 +57,11 @@ const App = () => {
             <Screen
               name={'Login'}
               component={Login}
+              options={{gestureEnabled: false, headerShown: false}}
+            />
+            <Screen
+              name={'PlayPage'}
+              component={PlayPage}
               options={{gestureEnabled: false, headerShown: false}}
             />
           </Navigator>
