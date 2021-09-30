@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import {Input} from '../../components/Input';
 import React, {useRef, useState} from 'react';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {StackNavigationProp} from '@react-navigation/stack';
 import {useNavigation} from '@react-navigation/native';
 import {Spinner} from 'native-base';
 import Animated, {
@@ -30,7 +30,7 @@ enum Status {
 }
 
 const Login = () => {
-  const navigation = useNavigation<NativeStackNavigationProp<any>>();
+  const navigation = useNavigation<StackNavigationProp<any, 'Login'>>();
   const {width} = useWindowDimensions();
 
   const aniValue = useSharedValue(width - 80);

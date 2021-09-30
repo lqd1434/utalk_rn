@@ -36,7 +36,7 @@ const PlayIcon = () => {
           shadowOffset: {width: -10, height: -10},
           shadowOpacity: 1,
           shadowColor: '#8289E8',
-          backgroundColor: '#FFFFFF',
+          backgroundColor: '#CECEF1',
           shadowRadius: 20,
           elevation: 10,
           borderColor: '#FFF',

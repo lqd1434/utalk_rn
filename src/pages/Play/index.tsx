@@ -1,16 +1,23 @@
 import React from 'react';
 import {Circle, Text, View, Heading, Slider, Icon} from 'native-base';
-import {StyleSheet, useWindowDimensions} from 'react-native';
+import {
+  StyleSheet,
+  TouchableWithoutFeedback,
+  useWindowDimensions,
+} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {AlbumIcon, BackIcon, ThumbIcon} from '../../lib/icons';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import PlayIcon from './components/PlayIcon';
 import LastIcon from './components/LastIcon';
 import NextIcon from './components/NextIcon';
+import {useNavigation} from '@react-navigation/native';
+import {StackNavigationProp} from '@react-navigation/stack';
 
 const PlayPage = () => {
   const {width} = useWindowDimensions();
   const {top} = useSafeAreaInsets();
+  const navigation = useNavigation<StackNavigationProp<any, 'PlayPage'>>();
   return (
     <LinearGradient
       start={{x: 0, y: 0}}
@@ -18,16 +25,18 @@ const PlayPage = () => {
       locations={[0, 0.2, 0.7, 1]}
       colors={['#7F7FDA', '#8787D2', '#7E83CB', '#A1A1EB']}
       style={[styles.con, {paddingTop: top}]}>
-      <View height={60} alignSelf={'flex-start'}>
-        <Circle
-          size={50}
-          backgroundColor={'#ADB1F0'}
-          borderRadius={25}
-          ml={5}
-          mt={3}>
-          <BackIcon color={'#5660E0'} />
-        </Circle>
-      </View>
+      <TouchableWithoutFeedback onPress={() => navigation.navigate('Home')}>
+        <View height={60} alignSelf={'flex-start'}>
+          <Circle
+            size={50}
+            backgroundColor={'#ADB1F0'}
+            borderRadius={25}
+            ml={5}
+            mt={3}>
+            <BackIcon color={'#5660E0'} />
+          </Circle>
+        </View>
+      </TouchableWithoutFeedback>
       <View
         h={width / 2}
         mt={16}
@@ -63,7 +72,7 @@ const PlayPage = () => {
       <View style={styles.progress}>
         <Text color={'#FFF'}>00:00</Text>
         <View style={{width: '65%'}}>
-          <Slider defaultValue={70} size="sm" colorScheme="green">
+          <Slider defaultValue={70} size="sm">
             <Slider.Track bg={'#CFCFFD'}>
               <Slider.FilledTrack bg={'#6D6DF9'} />
             </Slider.Track>

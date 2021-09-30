@@ -11,14 +11,15 @@
 import React from 'react';
 import {StatusBar} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {createStackNavigator} from '@react-navigation/stack';
 import Login from './pages/Login';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import Home from './pages/Home';
 import {NativeBaseProvider} from 'native-base';
 import PlayPage from './pages/Play';
+import {emitter} from './utils/EventEmiter';
 
-const {Screen, Navigator} = createNativeStackNavigator();
+const {Screen, Navigator} = createStackNavigator();
 
 const App = () => {
   const config = {
@@ -27,6 +28,10 @@ const App = () => {
     },
   };
 
+  const handleScreenChange = (state: any) => {
+    const index = state.data.state.index;
+    emitter.emit<boolean>('showFAB', index === 0);
+  };
   return (
     <SafeAreaProvider>
       <NativeBaseProvider config={config}>
@@ -37,7 +42,10 @@ const App = () => {
             backgroundColor={'transparent'}
           />
           <Navigator
-            initialRouteName={'PlayPage'}
+            screenListeners={{
+              state: handleScreenChange,
+            }}
+            initialRouteName={'Home'}
             screenOptions={{
               headerStyle: {
                 backgroundColor: '#f4511e',
